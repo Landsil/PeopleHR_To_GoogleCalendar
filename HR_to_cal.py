@@ -1,5 +1,9 @@
+#!/usr/bin/env python3
+
 import requests
 import json
+from pprint import pprint
+import csv
 
 # Call to PeopleHR API to get data
 url = 'https://api.peoplehr.net/Employee'
@@ -7,14 +11,17 @@ payload={'APIKey':'<< Your API token here >>',
 	'Action':'GetAllEmployeeDetail',
 	'IncludeLeavers':'false'}
 
- You have to call as json, output is "inbound"
-inbound = requests.post(url, json=payload)
+# You have to call as json, output is "inbound"
+r = requests.post(url, json=payload)
+results = r.json()['Results']
 
 # Data we need
 permitted = {"EmployeeId", "FirstName", "LastName", "StartDate", "DateOfBirth"}
 
-existing.update((key, val) for (key, val) in inbound.items() if key in permitted)
+#From results list take DisplayValue that is listed in permitted
+list_of_people = [{key:x[key]['DisplayValue'] for key in permitted} for x in results]
 
 
 
-#inbound.json()
+#list_of_people
+#pprint(_)
