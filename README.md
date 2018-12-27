@@ -1,7 +1,8 @@
 # PeopleHR_To_GoogleCalendar
 Take data from PeopleHR and create events for Birthdays and anniversaries.
 
-Check WIKI to work plan/story
+Check Wiki for work plan/story
+https://github.com/Landsil/PeopleHR_To_GoogleCalendar/wiki
 
 PeopleHR test API
 https://api.peoplehr.net/pages/functional/Default.aspx
