@@ -1,0 +1,582 @@
+{
+  "IsError": "false",
+  "Status": 0,
+  "Message": "string",
+  "Result": [
+    {
+      "EmployeeId": {
+        "DisplayValue": "PW180",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "Title": {
+        "DisplayValue": "Mr.",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "FirstName": {
+        "DisplayValue": "Employee first name",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "LastName": {
+        "DisplayValue": "Employee last name",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "OtherName": {
+        "DisplayValue": "Other name",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "KnownAs": {
+        "DisplayValue": "Known as value",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "EmailId": {
+        "DisplayValue": "firstname.lastname@itgurusssoftware.com",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "StartDate": {
+        "DisplayValue": "2014-01-01",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "DateOfBirth": {
+        "DisplayValue": "1991-08-07",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "JobRole": {
+        "DisplayValue": "Software Enginner",
+        "FieldHistoryForJobRole": [
+          {
+            "JobRole": "Software enginner",
+            "EffectiveDate": "2015-06-20",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "Company": {
+        "DisplayValue": "Company name",
+        "FieldHistoryForEffectiveDate": [
+          {
+            "FieldData": "don't know",
+            "EffectiveDate": "2014-07-12",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "CompanyEffectiveDate": {
+        "DisplayValue": "2014-01-01"
+      },
+      "Location": {
+        "DisplayValue": "Mumbai",
+        "FieldHistoryForEffectiveDate": [
+          {
+            "FieldData": "don't know",
+            "EffectiveDate": "2014-07-12",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "LocationEffectiveDate": {
+        "DisplayValue": "2017-02-02"
+      },
+      "Department": {
+        "DisplayValue": "IT",
+        "FieldHistoryForEffectiveDate": [
+          {
+            "FieldData": "don't know",
+            "EffectiveDate": "2014-07-12",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "DepartmentEffectiveDate": {
+        "DisplayValue": "2017-05-01"
+      },
+      "JobRoleChangeDate": {
+        "DisplayValue": "2017-05-05"
+      },
+      "ReportsTo": {
+        "DisplayValue": "FirstName LastName",
+        "FieldHistoryForEffectiveDate": [
+          {
+            "FieldData": "don't know",
+            "EffectiveDate": "2014-07-12",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "ReportsToEffectiveDate": {
+        "DisplayValue": "2016-06-06"
+      },
+      "ReportsToEmployeeId": {
+        "DisplayValue": "PW6"
+      },
+      "ReportsToEmailAddress": {
+        "DisplayValue": "abc.xyz@itgurusssoftware.com"
+      },
+      "NISNumber": {
+        "DisplayValue": "AAAAAAAAAAAAAA",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "Nationality": {
+        "DisplayValue": "Indian",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "EmploymentType": {
+        "DisplayValue": "Full Time",
+        "FieldHistoryForEffectiveDate": [
+          {
+            "FieldData": "don't know",
+            "EffectiveDate": "2014-07-12",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "EmploymentTypeEffectiveDate": {
+        "DisplayValue": "2017-07-01"
+      },
+      "EmployeeStatus": {
+        "DisplayValue": "1"
+      },
+      "HolidayAllowanceDays": {
+        "DisplayValue": "0.00"
+      },
+      "HolidayAllowanceMins": {
+        "DisplayValue": "0"
+      },
+      "NoticePeriod": {
+        "DisplayValue": "don't know",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "ProbationEndDate": {
+        "DisplayValue": "2017-04-03",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "Gender": {
+        "DisplayValue": "Male",
+        "FieldHistory": [
+          {
+            "OldValue": "Old value",
+            "NewValue": "New value",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      },
+      "ContactDetail": {
+        "Address": {
+          "DisplayValue": "Address",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "WorkPhoneNumber": {
+          "DisplayValue": "9966005500",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "PersonalPhoneNumber": {
+          "DisplayValue": "9988776655",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "PersonalEmail": {
+          "DisplayValue": "abc@itgurussoftware.com",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "Mobile": {
+          "DisplayValue": "9988990099",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        }
+      },
+      "OtherContact": {
+        "OtherContactName": {
+          "DisplayValue": "xyz"
+        },
+        "Relationship": {
+          "DisplayValue": "Relationship value"
+        },
+        "OtheContactAddress": {
+          "DisplayValue": "Other contact address"
+        },
+        "Telephone": {
+          "DisplayValue": "Telephone number"
+        },
+        "Mobile": {
+          "DisplayValue": "9900998877"
+        },
+        "Comments": {
+          "DisplayValue": "Comments here"
+        }
+      },
+      "RightToWork": {
+        "DocumentType": {
+          "DisplayValue": "don't know"
+        },
+        "DocumentId": {
+          "DisplayValue": "1"
+        },
+        "ValidFrom": {
+          "DisplayValue": "2017-02-02"
+        },
+        "ValidTo": {
+          "DisplayValue": "2017-03-03"
+        },
+        "Duration": {
+          "DisplayValue": "1"
+        },
+        "RightToWorkComments": {
+          "DisplayValue": "Right to work comments"
+        }
+      },
+      "BackgroundDetail": {
+        "CheckType": {
+          "DisplayValue": "check type value"
+        },
+        "CompletionDate": {
+          "DisplayValue": "2016-06-06"
+        },
+        "ExpiryDate": {
+          "DisplayValue": "2016-07-07"
+        },
+        "BackgroundDetailComments": {
+          "DisplayValue": "Background detail comments"
+        }
+      },
+      "BankDetail": {
+        "BankName": {
+          "DisplayValue": "SBI",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "BankAddress": {
+          "DisplayValue": "Pune",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "BankCode": {
+          "DisplayValue": "6789",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "AccountNumber": {
+          "DisplayValue": "8411540414",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "AccountName": {
+          "DisplayValue": "Account Name",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        }
+      },
+      "EmploymentDetail": {
+        "PayrollCompany": {
+          "DisplayValue": "Your payroll company's name",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "PayrollID": {
+          "DisplayValue": "Your payroll id",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "TimeAndAttendanceID": {
+          "DisplayValue": "Your time and attendance id",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "RotaID": {
+          "DisplayValue": "Your Rota id",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "CRMID": {
+          "DisplayValue": "Your CRM id",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "ATSID": {
+          "DisplayValue": "Your ATS id",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "PerformanceID": {
+          "DisplayValue": "Your performance id",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "BenefitsID": {
+          "DisplayValue": "Your benefits id",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "System1ID": {
+          "DisplayValue": "Your system one id",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "System2ID": {
+          "DisplayValue": "Your system two id",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "System3ID": {
+          "DisplayValue": "Your system three id",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        },
+        "MethodOfRecruitment": {
+          "DisplayValue": "Method of recruitment",
+          "FieldHistory": [
+            {
+              "OldValue": "Old value",
+              "NewValue": "New value",
+              "ChangedOn": "2017-07-12",
+              "ReasonForChange": "Reason for change"
+            }
+          ]
+        }
+      },
+      "LeavingDate": "2017-07-07",
+      "ReasonForLeaving": "Reason for leaving employee",
+      "EmployeeImage": "don't know please check ",
+      "APIColumn1": "APIColumn1 Value",
+      "APIColumn2": "APIColumn2 Value",
+      "APIColumn3": "APIColumn3 Value",
+      "APIColumn4": "APIColumn4 Value",
+      "APIColumn5": "APIColumn5 Value",
+      "lstFieldHistoryJobrole": {
+        "FieldHistoryForJobRole": [
+          {
+            "JobRole": "Software enginner",
+            "EffectiveDate": "2015-06-20",
+            "ChangedOn": "2017-07-12",
+            "ReasonForChange": "Reason for change"
+          }
+        ]
+      }
+    }
+  ]
+}
