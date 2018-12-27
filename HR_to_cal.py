@@ -7,7 +7,7 @@ import csv
 
 # Call to PeopleHR API to get data
 url = 'https://api.peoplehr.net/Employee'
-payload={'APIKey':'<< Your API token here >>',
+payload={'APIKey':'<< Your API token here, betwenn those ''>>',
 	'Action':'GetAllEmployeeDetail',
 	'IncludeLeavers':'false'}
 
