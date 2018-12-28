@@ -42,27 +42,26 @@ list_of_people = [{key:x[key]['DisplayValue'] for key in permitted} for x in res
 #print('Does it look fine?')
 #input('Press Enter to continue...')
 
-# Autentication to google
-# The file token.json stores the user's access and refresh tokens, and is
-# created automatically when the authorization flow completes for the first
-# time.
-store = file.Storage('token.json')
-creds = store.get()
-if not creds or creds.invalid:
-    flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
-    creds = tools.run_flow(flow, store)
-service = build('calendar', 'v3', http=creds.authorize(Http()))
-# You should be autenticated now
 
+def remove_old_events():
+    # The file token.json stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    store = file.Storage('token.json')
+    creds = store.get()
+    if not creds or creds.invalid:
+        flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
+        creds = tools.run_flow(flow, store)
+    service = build('calendar', 'v3', http=creds.authorize(Http()))
+    # You should be autenticated now
 
-# Now we are starting with callendar
-# You can hard-code ID if you wish, we will open it from a file again.
-# group calendar ID looks like "domain.com_iouherfiuhenriufgh@group.calendar.google.com"
-with open('calendar_ID.txt', 'r') as fp:
-    my_calendar_ID = fp.read().strip()
+    # Now we are starting with callendar
+    # You can hard-code ID if you wish, we will open it from a file again.
+    # group calendar ID looks like "domain.com_iouherfiuhenriufgh@group.calendar.google.com"
+    with open('calendar_ID.txt', 'r') as fp:
+        my_calendar_ID = fp.read().strip()
 
-def remove_events():
-# Call the Calendar API to get list of all events in calendar
+    # Call the Calendar API to get list of all events in calendar
     # https://developers.google.com/calendar/v3/reference/calendars/clear
     events_delete = []
     page_token = None
@@ -84,54 +83,144 @@ def remove_events():
         service.events().delete(calendarId=my_calendar_ID, eventId=string).execute()
 
 if __name__ == '__main__':
-    remove_events()
+    remove_old_events()
 
-# Now we should create events
-events_list = []
-people_with_missing_DateOfBirth = []
+# Now we should create events for birthdays
+def create_new_birthdays():
+    # The file token.json stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    store = file.Storage('token.json')
+    creds = store.get()
+    if not creds or creds.invalid:
+        flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
+        creds = tools.run_flow(flow, store)
+    service = build('calendar', 'v3', http=creds.authorize(Http()))
+    # You should be autenticated now
 
-for person in list_of_people:
-    # Create nesssesery dates, have to strip time
-    # Execption if date is missing.
-    try:
-        DoB = datetime.strptime(person['DateOfBirth'], "%Y-%m-%d").date()
-    except ValueError:
-        people_with_missing_DateOfBirth.append('Missing for {} {}'.format(person['FirstName'], person['LastName']))
-        continue
+    # Now we are starting with callendar
+    # You can hard-code ID if you wish, we will open it from a file again.
+    # group calendar ID looks like "domain.com_iouherfiuhenriufgh@group.calendar.google.com"
+    with open('calendar_ID.txt', 'r') as fp:
+        my_calendar_ID = fp.read().strip()
 
-    now = datetime.now()
-    start_date = DoB.replace(year=now.year)
-    age = start_date.year - DoB.year
-    end_date = start_date + timedelta(days=1)
-    # Create an event body
+    events_list = []
+    people_with_missing_DateOfBirth = []
+    for person in list_of_people:
+        # Create nesssesery dates, have to strip time
+        # Execption if date is missing.
+        try:
+            DoB = datetime.strptime(person['DateOfBirth'], "%Y-%m-%d").date()
+        except ValueError:
+            people_with_missing_DateOfBirth.append('Missing for {} {}'.format(person['FirstName'], person['LastName']))
+            continue
 
-    event = {
-      'summary': 'It\'s {} {} Birthday, {} is {} year\'s old'.format(person['FirstName'], person['LastName'], person['FirstName'], age),
-      'start': {
-        'date': str(start_date),
-        'timeZone': 'Europe/London',
-      },
-      'end': {
-        'date': str(end_date),
-        'timeZone': 'Europe/London',
-      },
-      'recurrence': [
-        'RRULE:FREQ=YEARLY;COUNT=2'
-      ],
-    }   
-    events_list.append(event)
+        now = datetime.now()
+        start_date = DoB.replace(year=now.year)
+        age = start_date.year - DoB.year
+        end_date = start_date + timedelta(days=1)
 
-# Debug
-#print(people_with_missing_DateOfBirth)
-#print('Those have to be corrected')
-#input('Press Enter to continue...')
+        # Create an event body
+        event = {
+          'summary': 'It\'s {} {} Birthday, {} is {} year\'s old'.format(person['FirstName'], person['LastName'], person['FirstName'], age),
+          'start': {
+            'date': str(start_date),
+            'timeZone': 'Europe/London',
+          },
+          'end': {
+            'date': str(end_date),
+            'timeZone': 'Europe/London',
+          },
+          'recurrence': [
+            'RRULE:FREQ=YEARLY;COUNT=2'
+          ],
+        }   
+        events_list.append(event)
 
-# Debug
-#pprint(events_list)
-#print('Those will be created')
-#input('Press Enter to continue...')
+    # Debug
+    #print(people_with_missing_DateOfBirth)
+    #print('Those have to be corrected')
+    #input('Press Enter to continue...')
 
-# Insert events into calendar
-for event in event_list:
-    time.sleep(0.1)
-    event = service.events().insert(calendarId=my_calendar_ID, body=event).execute()
+    # Debug
+    pprint(events_list)
+    print('Those will be created')
+    input('Press Enter to continue...')
+
+    # Insert events into calendar
+    for events in events_list:
+        time.sleep(0.1)
+        event = service.events().insert(calendarId=my_calendar_ID, body=events).execute()
+
+if __name__ == '__main__':
+    create_new_birthdays()
+
+# Now we should create events for anniversaries
+def create_new_anniversaries():
+    # The file token.json stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    store = file.Storage('token.json')
+    creds = store.get()
+    if not creds or creds.invalid:
+        flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
+        creds = tools.run_flow(flow, store)
+    service = build('calendar', 'v3', http=creds.authorize(Http()))
+    # You should be autenticated now
+
+    # Now we are starting with callendar
+    # You can hard-code ID if you wish, we will open it from a file again.
+    # group calendar ID looks like "domain.com_iouherfiuhenriufgh@group.calendar.google.com"
+    with open('calendar_ID.txt', 'r') as fp:
+        my_calendar_ID = fp.read().strip()
+
+    events_list = []
+    people_with_missing_StartDate = []
+    for person in list_of_people:
+        # Create nesssesery dates, have to strip time
+        # Execption if date is missing.
+        try:
+            FDoW = datetime.strptime(person['StartDate'], "%Y-%m-%d").date()
+        except ValueError:
+            people_with_missing_DateOfBirth.append('Missing for {} {}'.format(person['FirstName'], person['LastName']))
+            continue
+
+        now = datetime.now()
+        start_date = FDoW.replace(year=now.year)
+        tenure = start_date.year - FDoW.year
+        end_date = start_date + timedelta(days=1)
+
+        # Create an event body
+        event = {
+          'summary': 'It\'s {} {} Anniversary, {} worked here for {} years'.format(person['FirstName'], person['LastName'], person['FirstName'], tenure),
+          'start': {
+            'date': str(start_date),
+            'timeZone': 'Europe/London',
+          },
+          'end': {
+            'date': str(end_date),
+            'timeZone': 'Europe/London',
+          },
+          'recurrence': [
+            'RRULE:FREQ=YEARLY;COUNT=2'
+          ],
+        }   
+        events_list.append(event)
+
+    # Debug
+    #print(people_with_missing_StartDate)
+    #print('Those have to be corrected')
+    #input('Press Enter to continue...')
+
+    # Debug
+    pprint(events_list)
+    print('Those will be created')
+    input('Press Enter to continue...')
+
+    # Insert events into calendar
+    for events in events_list:
+        time.sleep(0.1)
+        event = service.events().insert(calendarId=my_calendar_ID, body=events).execute()
+
+if __name__ == '__main__':
+    create_new_anniversaries()
