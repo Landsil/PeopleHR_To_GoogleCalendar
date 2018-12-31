@@ -142,6 +142,9 @@ def create_new_birthdays():
         }   
         events_list.append(event)
 
+    with open('people_with_missing_DateOfBirth.json', 'w') as fp:
+        json.dump(people_with_missing_DateOfBirth, fp, sort_keys=True, indent=4)
+
     # Debug
     #print(people_with_missing_DateOfBirth)
     #print('Those have to be corrected')
@@ -189,7 +192,7 @@ def create_new_anniversaries():
         try:
             FDoW = datetime.strptime(person['StartDate'], "%Y-%m-%d").date()
         except ValueError:
-            people_with_missing_DateOfBirth.append('Missing for {} {}'.format(person['FirstName'], person['LastName']))
+            people_with_missing_StartDate.append('Missing for {} {}'.format(person['FirstName'], person['LastName']))
             continue
 
         now = datetime.now()
@@ -213,6 +216,9 @@ def create_new_anniversaries():
           ],
         }   
         events_list.append(event)
+
+    with open('people_with_missing_StartDate.json', 'w') as fp:
+        json.dump(people_with_missing_StartDate, fp, sort_keys=True, indent=4)
 
     # Debug
     #print(people_with_missing_StartDate)
