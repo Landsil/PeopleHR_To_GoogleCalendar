@@ -6,6 +6,7 @@ from httplib2 import Http
 from oauth2client import file, client, tools
 from pprint import pprint
 from datetime import datetime, timedelta, date
+import sys
 import time
 import requests
 import json
@@ -42,6 +43,9 @@ list_of_people = [{key:x[key]['DisplayValue'] for key in permitted} for x in res
 #print('Does it look fine?')
 #input('Press Enter to continue...')
 
+with open('people.json', 'w') as fp:
+    json.dump(list_of_people, fp, sort_keys=True, indent=4)
+
 
 def remove_old_events():
     # The file token.json stores the user's access and refresh tokens, and is
@@ -73,9 +77,10 @@ def remove_old_events():
         if not page_token:
             break
 
-    print(events_delete)
-    print('Those will be deleted')
-    input('Press Enter to continue...')
+    # Debug
+    #print(events_delete)
+    #print('Those will be deleted')
+    #input('Press Enter to continue...')
 
     # This bit should enumarete thru events and delete them one by one
     for string in events_delete:
@@ -108,7 +113,7 @@ def create_new_birthdays():
     people_with_missing_DateOfBirth = []
     for person in list_of_people:
         # Create nesssesery dates, have to strip time
-        # Execption if date is missing.
+        # Exception if date is missing.
         try:
             DoB = datetime.strptime(person['DateOfBirth'], "%Y-%m-%d").date()
         except ValueError:
@@ -132,7 +137,7 @@ def create_new_birthdays():
             'timeZone': 'Europe/London',
           },
           'recurrence': [
-            'RRULE:FREQ=YEARLY;COUNT=2'
+            'RRULE:FREQ=YEARLY;COUNT=1'
           ],
         }   
         events_list.append(event)
@@ -143,9 +148,11 @@ def create_new_birthdays():
     #input('Press Enter to continue...')
 
     # Debug
-    pprint(events_list)
-    print('Those will be created')
-    input('Press Enter to continue...')
+    #pprint(events_list)
+    #print('Those will be created')
+    #input('Press Enter to continue...')
+    with open('birthdays.json', 'w') as fp:
+        json.dump(events_list, fp, sort_keys=True, indent=4)
 
     # Insert events into calendar
     for events in events_list:
@@ -202,7 +209,7 @@ def create_new_anniversaries():
             'timeZone': 'Europe/London',
           },
           'recurrence': [
-            'RRULE:FREQ=YEARLY;COUNT=2'
+            'RRULE:FREQ=YEARLY;COUNT=1'
           ],
         }   
         events_list.append(event)
@@ -213,9 +220,12 @@ def create_new_anniversaries():
     #input('Press Enter to continue...')
 
     # Debug
-    pprint(events_list)
-    print('Those will be created')
-    input('Press Enter to continue...')
+    #pprint(events_list)
+    #print('Those will be created')
+    #input('Press Enter to continue...')
+
+    with open('anniversaries.json', 'w') as fp:
+        json.dump(events_list, fp, sort_keys=True, indent=4)
 
     # Insert events into calendar
     for events in events_list:
@@ -224,3 +234,6 @@ def create_new_anniversaries():
 
 if __name__ == '__main__':
     create_new_anniversaries()
+
+print('Done, I guess?')
+print('\a')
