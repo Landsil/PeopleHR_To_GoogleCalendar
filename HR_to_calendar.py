@@ -43,8 +43,8 @@ list_of_people = [{key:x[key]['DisplayValue'] for key in permitted} for x in res
 #print('Does it look fine?')
 #input('Press Enter to continue...')
 
-with open('people.json', 'w') as fp:
-    json.dump(list_of_people, fp, sort_keys=True, indent=4)
+#with open('people.json', 'w') as fp:
+#    json.dump(list_of_people, fp, sort_keys=True, indent=4)
 
 
 def remove_old_events():
@@ -151,8 +151,8 @@ def create_new_birthdays():
     #pprint(events_list)
     #print('Those will be created')
     #input('Press Enter to continue...')
-    with open('birthdays.json', 'w') as fp:
-        json.dump(events_list, fp, sort_keys=True, indent=4)
+    #with open('birthdays.json', 'w') as fp:
+    #    json.dump(events_list, fp, sort_keys=True, indent=4)
 
     # Insert events into calendar
     for events in events_list:
@@ -224,8 +224,8 @@ def create_new_anniversaries():
     #print('Those will be created')
     #input('Press Enter to continue...')
 
-    with open('anniversaries.json', 'w') as fp:
-        json.dump(events_list, fp, sort_keys=True, indent=4)
+    #with open('anniversaries.json', 'w') as fp:
+    #    json.dump(events_list, fp, sort_keys=True, indent=4)
 
     # Insert events into calendar
     for events in events_list:
