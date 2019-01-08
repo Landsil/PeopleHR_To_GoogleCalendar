@@ -1,32 +1,36 @@
 #!/usr/bin/env python3
-import googleapiclient
-from googleapiclient.discovery import build
-from httplib2 import Http
-from oauth2client import file, client, tools
+
 from datetime import datetime, timedelta
-from logging import Handler
-import time
-import requests
 import json
+import requests
+import time
 import traceback
 
+import googleapiclient
+from googleapiclient.discovery import build
+import httplib2
+import oauth2client as oauth
+from oauth2client import file, client, tools
+
+
+from logging import Handler
 # import pprint
 
 # Calendar API scopes
-SCOPES = 'https://www.googleapis.com/auth/calendar'
-SCOPES = 'https://www.googleapis.com/auth/calendar.events'
+SCOPES = ('https://www.googleapis.com/auth/calendar' +
+          'https://www.googleapis.com/auth/calendar.events')
 
 # Global variables / external files / auth
 
 # 1. Authenticate to google
 # The file token.json stores the user's access and refresh tokens, and is
 # created automatically when the authorization flow completes for the first time.
-store = file.Storage('token.json')
+store = oauth.file.Storage('token.json')
 creds = store.get()
 if not creds or creds.invalid:
-    flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
-    creds = tools.run_flow(flow, store)
-service = build('calendar', 'v3', http=creds.authorize(Http()))
+    flow = oauth.client.flow_from_clientsecrets('credentials.json', SCOPES)
+    creds = oauth.tools.run_flow(flow, store)
+service = googleapiclient.discovery.build('calendar', 'v3', http=creds.authorize(httplib2.Http()))
 # You should be authenticated now
 
 # 2. Read file with API key to PeopleHR while striping possible white spaces,
@@ -39,9 +43,13 @@ with open('peopleHR_APIkey.txt', 'r') as fp:
 with open('calendar_ID_test.txt', 'r') as fp:
     my_calendar_ID = fp.read().strip()
 
+# 4. Read file with URL for posting to slack
+with open('slack_URL.txt', 'r') as fp:
+    slack_URL = fp.read().strip()
+
 
 class SlackLogHandler(Handler):
-    def __init__(self, logging_url='https://hooks.slack.com/services/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',
+    def __init__(self, logging_url=slack_URL,
                  stack_trace=True):
         Handler.__init__(self)
         self.logging_url = logging_url
@@ -55,8 +63,8 @@ class SlackLogHandler(Handler):
                 requests.post(self.logging_url, data=json.dumps({'text': message}))
 
 
-def post_to_slack(error):
-    url = 'https://hooks.slack.com/services/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'
+def post_error_to_slack(error):
+    url = slack_URL
     payload = {'text': 'You had exception in:',
                'attachments': [
                    {
@@ -99,8 +107,8 @@ def get_list_of_people():
     # input('Press Enter to continue...')
 
     # If needed for check you can also dump a file.
-    with open('list_of_people.json', 'w') as fp:
-        json.dump(list_of_people, fp, sort_keys=True, indent=4)
+    # with open('list_of_people.json', 'w') as fp:
+    #     json.dump(list_of_people, fp, sort_keys=True, indent=4)
     return list_of_people
 
 
@@ -122,9 +130,10 @@ def get_old_events():
     # print(old_events)
     # print('Those will be deleted')
     # input('Press Enter to continue...')
+
     # If needed for check you can also dump a file.
-    with open('old_events.json', 'w') as fp:
-        json.dump(old_events, fp, sort_keys=True, indent=4)
+    # with open('old_events.json', 'w') as fp:
+    #     json.dump(old_events, fp, sort_keys=True, indent=4)
 
     return old_events
 
@@ -138,7 +147,7 @@ def remove_old_events(old_events):
             time.sleep(0.05)
             service.events().delete(calendarId=my_calendar_ID, eventId=string).execute()
         except googleapiclient.errors.HttpError as HttpError:
-            post_to_slack(HttpError)
+            post_error_to_slack(HttpError)
         except Exception as error:
             SlackLogHandler().emit(error)
         continue
@@ -157,7 +166,7 @@ def create_birthday_events(list_of_people):
         except ValueError:
             people_with_missing_DateOfBirth.append('{} {}'.format(person['FirstName'], person['LastName']))
         except googleapiclient.errors.HttpError as HttpError:
-            post_to_slack(HttpError)
+            post_error_to_slack(HttpError)
         except Exception as error:
             SlackLogHandler().emit(error)
             continue
@@ -195,9 +204,10 @@ def create_birthday_events(list_of_people):
     # pprint(events_list)
     # print('Those will be created')
     # input('Press Enter to continue...')
+
     # Use that if you need a dump for a check
-    with open('birthday_events.json', 'w') as fp:
-        json.dump(birthday_events, fp, sort_keys=True, indent=4)
+    # with open('birthday_events.json', 'w') as fp:
+    #     json.dump(birthday_events, fp, sort_keys=True, indent=4)
     return birthday_events
 
 
@@ -213,7 +223,7 @@ def create_anniversary_events(list_of_people):
         except ValueError:
             people_with_missing_StartDate.append('{} {}'.format(person['FirstName'], person['LastName']))
         except googleapiclient.errors.HttpError as HttpError:
-            post_to_slack(HttpError)
+            post_error_to_slack(HttpError)
         except Exception as error:
             SlackLogHandler().emit(error)
             continue
@@ -254,8 +264,9 @@ def create_anniversary_events(list_of_people):
     # print('Those will be created')
     # input('Press Enter to continue...')
 
-    with open('anniversary_events.json', 'w') as fp:
-        json.dump(anniversary_events, fp, sort_keys=True, indent=4)
+    # Use that if you need to dump a file for testing
+    # with open('anniversary_events.json', 'w') as fp:
+    #     json.dump(anniversary_events, fp, sort_keys=True, indent=4)
     return anniversary_events
 
 
@@ -268,7 +279,7 @@ def send_events(birthday_events, anniversary_events):
             time.sleep(0.05)
             event = service.events().insert(calendarId=my_calendar_ID, body=events).execute()
         except googleapiclient.errors.HttpError as HttpError:
-            post_to_slack(HttpError)
+            post_error_to_slack(HttpError)
         except Exception as error:
             SlackLogHandler().emit(error)
         continue
@@ -279,7 +290,7 @@ def send_events(birthday_events, anniversary_events):
             time.sleep(0.05)
             event = service.events().insert(calendarId=my_calendar_ID, body=events).execute()
         except googleapiclient.errors.HttpError as HttpError:
-            post_to_slack(HttpError)
+            post_error_to_slack(HttpError)
         except Exception as error:
             SlackLogHandler().emit(error)
         continue
