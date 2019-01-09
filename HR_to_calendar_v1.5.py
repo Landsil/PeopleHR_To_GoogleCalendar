@@ -37,7 +37,7 @@ with open('peopleHR_APIkey.txt', 'r') as fp:
 
 # 3. You can hard-code calendar ID if you wish, we will open it from a file again.
 # group calendar ID looks like "domain.com_iouherfiuhenriufgh@group.calendar.google.com"
-with open('calendar_ID_test.txt', 'r') as fp:
+with open('calendar_ID.txt', 'r') as fp:
     my_calendar_ID = fp.read().strip()
 
 # 4. Read file with URL for posting to slack
