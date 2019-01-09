@@ -11,9 +11,6 @@ from googleapiclient.discovery import build
 import httplib2
 import oauth2client as oauth
 from oauth2client import file, client, tools
-
-
-from logging import Handler
 # import pprint
 
 # Calendar API scopes
@@ -48,21 +45,16 @@ with open('slack_URL.txt', 'r') as fp:
     slack_URL = fp.read().strip()
 
 
-class SlackLogHandler(Handler):
-    def __init__(self, logging_url=slack_URL,
-                 stack_trace=True):
-        Handler.__init__(self)
-        self.logging_url = logging_url
-        self.stack_trace = stack_trace
-
-    def emit(self, record):
-        message = '%s' % (record.getMessage())
-        if self.stack_trace:
-            if record.exc_info:
-                message += '\n'.join(traceback.format_exception(*record.exc_info))
-                requests.post(self.logging_url, data=json.dumps({'text': message}))
+# 5. This handles full errors and sends them to slack
+def send_error_info_to_slack(error):
+    url = slack_URL
+    message = '%s' % (error.getMessage())
+    if error.exc_info:
+        message += '\n'.join(traceback.format_exception(*error.exc_info))
+        requests.post(url, data=json.dumps({'text': message}))
 
 
+# 6. This takes simple string errors and sends them to slack
 def post_error_to_slack(error):
     url = slack_URL
     payload = {'text': 'You had exception in:',
@@ -98,7 +90,12 @@ def get_list_of_people():
     permitted = {"FirstName", "LastName", "StartDate", "DateOfBirth"}  # "EmployeeId"
 
     # From results list take DisplayValue that is listed in permitted, save as list of dict.
-    list_of_people = [{key: x[key]['DisplayValue'] for key in permitted} for x in results]
+    list_of_people = []
+    for dictionary in results:
+        person = dict()
+        for key in permitted:
+            person[key] = dictionary[key]['DisplayValue']
+        list_of_people.append(person)
 
     print('get_list_of_people is done')
     # Debug check
@@ -149,7 +146,7 @@ def remove_old_events(old_events):
         except googleapiclient.errors.HttpError as HttpError:
             post_error_to_slack(HttpError)
         except Exception as error:
-            SlackLogHandler().emit(error)
+            send_error_info_to_slack(error)
         continue
 
     print('remove_old_events is done')
@@ -168,7 +165,7 @@ def create_birthday_events(list_of_people):
         except googleapiclient.errors.HttpError as HttpError:
             post_error_to_slack(HttpError)
         except Exception as error:
-            SlackLogHandler().emit(error)
+            send_error_info_to_slack(error)
             continue
 
         now = datetime.now()
@@ -225,7 +222,7 @@ def create_anniversary_events(list_of_people):
         except googleapiclient.errors.HttpError as HttpError:
             post_error_to_slack(HttpError)
         except Exception as error:
-            SlackLogHandler().emit(error)
+            send_error_info_to_slack(error)
             continue
 
         now = datetime.now()
@@ -279,9 +276,9 @@ def send_events(birthday_events, anniversary_events):
             time.sleep(0.05)
             event = service.events().insert(calendarId=my_calendar_ID, body=events).execute()
         except googleapiclient.errors.HttpError as HttpError:
-            post_error_to_slack(HttpError)
+            post_error_to_slack(str(HttpError))
         except Exception as error:
-            SlackLogHandler().emit(error)
+            send_error_info_to_slack(error)
         continue
 
     for events in anniversary_events:
@@ -290,9 +287,9 @@ def send_events(birthday_events, anniversary_events):
             time.sleep(0.05)
             event = service.events().insert(calendarId=my_calendar_ID, body=events).execute()
         except googleapiclient.errors.HttpError as HttpError:
-            post_error_to_slack(HttpError)
+            post_error_to_slack(str(HttpError))
         except Exception as error:
-            SlackLogHandler().emit(error)
+            send_error_info_to_slack(error)
         continue
 
     print('send_events is done')
