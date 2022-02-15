@@ -1,0 +1,23 @@
+cachetools>=3.1.1
+certifi>=2019.3.9
+chardet>=3.0.4
+Click>=7.0
+DateTime>=4.3
+google-api-python-client
+google-auth
+google-auth-httplib2
+# google-python-cloud-debugger
+# google-cloud-secret-manager
+httplib2>=0.19.0
+idna>=2.8
+oauth2client
+pip-tools>=6.2.0
+pyasn1-modules>=0.2.5
+pyasn1>=0.4.5
+pytz>=2019.1
+requests>=2.26
+rsa>=4.7
+six>=1.12.0
+uritemplate>=3.0.0
+urllib3>=1.25
+zope.interface>=5.2.0
