@@ -12,3 +12,14 @@ http://apidocs.peoplehr.com
 
 #### Pulling data to google Sheets
 https://github.com/Landsil/apps_script/blob/master/download_PeopleHR.gs
+
+
+
+atm this is running locally and requres you to have some of those files before you build image
+
+
+credentials.json
+peopleHR_APIkey.txt
+token.json
+calendar_ID.txt
+credentials.py
